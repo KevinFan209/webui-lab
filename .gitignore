@@ -18,3 +18,6 @@ Thumbs.db
 # 日誌
 *.log
 npm-debug.log*
+
+# 課程檔案
+lesson_file/
