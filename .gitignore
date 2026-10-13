@@ -21,3 +21,10 @@ npm-debug.log*
 
 # 課程檔案
 lesson_file/
+
+# Python
+__pycache__/
+*.pyc
+
+# 使用者申請資料（不進git）
+data/

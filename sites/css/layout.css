@@ -1,0 +1,59 @@
+/* Mobile-first 整頁版面 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: system-ui, "Noto Sans TC", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-header {
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+}
+
+.site-title {
+    margin: 0 0 var(--space-xs);
+    font-size: var(--font-size-xl);
+}
+
+.site-subtitle {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 0 var(--space-md) var(--space-lg);
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.site-footer {
+    padding: var(--space-md);
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+/* 平板/桌機：加大版面寬度 */
+@media (min-width: 768px) {
+    .main-content {
+        max-width: 760px;
+    }
+
+    .site-title {
+        font-size: 36px;
+    }
+}

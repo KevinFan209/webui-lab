@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的 Minecraft 伺服器</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1 class="site-title">⛏ 我的 Minecraft 伺服器</h1>
+        <p class="site-subtitle">歡迎朋友一起來玩！申請加入白名單前請先看看下面的連線資訊。</p>
+    </header>
+
+    <main class="main-content">
+        <section class="card">
+            <h2 class="section-title">連線資訊</h2>
+            <dl class="info-list">
+                <dt>伺服器位址</dt>
+                <dd><code>schmidt-lawsuits.tun.ply.gg</code>（不需要輸入 port，直接貼這個網址即可）</dd>
+                <dt>版本</dt>
+                <dd>Minecraft Java 版</dd>
+                <dt>加入方式</dt>
+                <dd>先在下方表單申請白名單，等管理員審核通過後即可連線</dd>
+            </dl>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">即時狀態</h2>
+            <div id="statusWidget" class="status-widget" aria-live="polite">
+                <p class="state-message">查詢中…</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">申請白名單</h2>
+            <form id="whitelistForm" class="whitelist-form">
+                <label for="minecraftId">你的 Minecraft 遊戲ID</label>
+                <input type="text" id="minecraftId" name="minecraftId" placeholder="例如：Steve123" required>
+
+                <label for="note">留言（選填）</label>
+                <textarea id="note" name="note" rows="3" placeholder="想說的話，或是誰介紹你來的"></textarea>
+
+                <button type="submit">送出申請</button>
+                <p id="formMessage" class="state-message" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>申請送出後由管理員手動審核，審核通過會再另行通知。</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
