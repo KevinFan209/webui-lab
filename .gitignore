@@ -26,6 +26,3 @@ lesson_file/
 # Python
 __pycache__/
 *.pyc
-
-# 使用者申請資料（不進git）
-data/
