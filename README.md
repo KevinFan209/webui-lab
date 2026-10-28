@@ -10,9 +10,9 @@ Web Programming 課程實作專案。
 .
 ├─ server.py            # FastAPI 進入點：/api/status、/api/whitelist-apply，其餘掛載 sites/
 ├─ sites/                # 實際被 serve 的網站內容
-│  ├─ index.html
-│  ├─ css/                # variables.css / layout.css / components.css
-│  └─ js/app.js
+│  ├─ index.html         # 目前為登入/註冊頁面原型（CSS-only，尚無JS邏輯）
+│  ├─ css/index.css
+│  └─ js/index.js        # 目前為空，表單尚未接上邏輯
 ├─ data/                # 白名單申請紀錄（執行時自動產生，不進git）
 ├─ requirements.txt     # fastapi / uvicorn / mcstatus
 ├─ assets/              # 圖片/圖示等靜態資源

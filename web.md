@@ -94,3 +94,25 @@ _待填：為什麼前端 `fetch()` 自己後端的 API、而不是直接從瀏�
 
 **心得**
 _待填_
+
+---
+
+## W05 — 登入/註冊頁面 UI 原型（CSS-only）
+
+**本週目標**：從空白頁面重新開始，練習用純 CSS 設計登入/註冊雙表單排版，暫不接任何 JS 邏輯。
+
+**完成清單**
+- [x] 把 `sites/index.html` 還原成最基礎的 HTML5 骨架，`css/`、`js/` 下的舊檔案（`variables.css`/`layout.css`/`components.css`/`app.js`，原本是 Minecraft 入口網站 MVP 的版面）清空重來
+- [x] 重寫 `sites/index.html`：加入 `.login-form`、`.register-form` 兩個 `<form>`
+- [x] 新增 `sites/css/index.css`：CSS 變數（`:root` 設色/深色主題）、Grid 雙欄排版、`::before`/`::after` 裝飾文字、focus 狀態、RWD breakpoint（`max-width: 680px`）、`prefers-reduced-motion`
+- [x] 新增 `sites/js/index.js`（目前為空檔案，尚未實作表單送出邏輯）
+- [ ] 表單目前沒有接任何 `fetch`，`/api/status`、`/api/whitelist-apply` 這兩個既有後端路由暫時沒有被前端呼叫到
+
+**本週 Web 概念**
+_待填_
+
+**除錯紀錄**
+_待填_
+
+**心得**
+_待填_

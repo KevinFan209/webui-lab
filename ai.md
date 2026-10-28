@@ -44,3 +44,7 @@ _待填_
   **AI 建議**：用`mcstatus`套件。自己刻意把精力放在Web概念（fetch/API設計）而不是遊戲網路協定的二進位格式，比較符合這門課的重點。
   **驗證方式**：實際`pip install mcstatus`後在本機對真實的`schmidt-lawsuits.tun.ply.gg`查詢，確實能拿到正確的在線人數跟MOTD。
   **決定**：採納，使用`mcstatus`。
+
+## W05
+
+_待填：這週登入/註冊頁面的 CSS 是用 Copilot 設計的，向它下了什麼指令、它給了什麼建議、怎麼驗證/取捨，由你自己填寫。_
