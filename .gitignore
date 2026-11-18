@@ -26,3 +26,4 @@ lesson_file/
 # Python
 __pycache__/
 *.pyc
+data/
