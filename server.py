@@ -44,4 +44,26 @@ def register_user(
     return {"message": "註冊成功"}
 
 
+@app.post("/api/login")
+def login_user(
+    user: schemas.UserLogin,
+    db: Session = Depends(database.get_db),
+):
+    existing_user = (
+        db.query(models.User)
+        .filter(models.User.username == user.username)
+        .first()
+    )
+    if existing_user is None or not pwd_context.verify(
+        user.password,
+        existing_user.hashed_password,
+    ):
+        return JSONResponse(
+            status_code=400,
+            content={"error": "帳號或密碼錯誤"},
+        )
+
+    return {"message": "登入成功"}
+
+
 app.mount("/", StaticFiles(directory="sites", html=True), name="sites")
