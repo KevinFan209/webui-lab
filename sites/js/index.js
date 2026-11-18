@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok) {
+                sessionStorage.setItem("isLoggedIn", "true");
+                sessionStorage.setItem("username", username);
                 alert("登入成功");
                 window.location.href = "homepage.html";
             } else {
