@@ -8,28 +8,55 @@
     <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
-    <main class="homepage-container">
-        <header class="homepage-header">
-            <h1>伺服器玩家首頁</h1>
-            <button id="logout-btn">登出</button>
-        </header>
-        <div id="server-status">查詢中...</div>
-        <form id="whitelist-form">
-            <p>白名單申請</p>
-            <input type="text" name="minecraft_id" placeholder="Minecraft ID"><br>
-            <input type="text" name="note" placeholder="備註（選填）"><br>
-            <button type="submit">送出白名單申請</button>
-        </form>
-        <div id="chat-box">
-            <div id="chat-messages"></div>
-            <form id="chat-form">
-                <input type="text" name="message" placeholder="輸入訊息">
-                <button type="submit">送出</button>
+    <div class="page-layout">
+        <aside class="sidebar"></aside>
+        <main class="homepage-container">
+            <header class="homepage-header">
+                <h1>伺服器玩家首頁</h1>
+                <button id="logout-btn">登出</button>
+            </header>
+            <div id="server-status">查詢中...</div>
+            <form id="whitelist-form">
+                <p>白名單申請</p>
+                <input type="text" name="minecraft_id" placeholder="Minecraft ID"><br>
+                <input type="text" name="note" placeholder="備註（選填）"><br>
+                <button type="submit">送出白名單申請</button>
             </form>
-        </div>
-    </main>
+            <div id="chat-box">
+                <div id="chat-messages"></div>
+                <form id="chat-form">
+                    <input type="text" name="message" placeholder="輸入訊息">
+                    <button type="submit">送出</button>
+                </form>
+            </div>
+        </main>
+        <aside class="right-panel">
+            <section class="panel-section">
+                <h2 class="panel-section-title">好友列表</h2>
+                <ul id="friends-list" class="friends-list"></ul>
+                <form id="add-friend-form">
+                    <input type="text" name="friend_username" placeholder="輸入使用者名稱">
+                    <button type="submit">加好友</button>
+                </form>
+            </section>
+            <section class="panel-section">
+                <h2 class="panel-section-title">群組列表</h2>
+                <ul id="groups-list" class="groups-list"></ul>
+                <form id="create-group-form">
+                    <input type="text" name="group_name" placeholder="新群組名稱">
+                    <button type="submit">建立群組</button>
+                </form>
+                <form id="join-group-form">
+                    <input type="text" name="group_name" placeholder="輸入群組名稱">
+                    <button type="submit">加入群組</button>
+                </form>
+            </section>
+        </aside>
+    </div>
     <script src="js/homepage.js"></script>
     <script src="js/status.js"></script>
     <script src="js/chat.js"></script>
+    <script src="js/friends.js"></script>
+    <script src="js/groups.js"></script>
 </body>
 </html>

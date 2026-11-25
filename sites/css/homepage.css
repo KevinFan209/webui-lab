@@ -30,11 +30,102 @@ body {
         linear-gradient(145deg, #101913 0%, #17251d 52%, #101a17 100%);
 }
 
+.page-layout {
+    display: flex;
+    gap: 24px;
+    width: min(100%, 960px);
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
 .homepage-container {
     display: grid;
     gap: 20px;
-    width: min(100%, 720px);
-    margin: 0 auto;
+    flex: 1;
+}
+
+.sidebar {
+    flex: 0 0 220px;
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface);
+}
+
+.friends-list,
+.groups-list {
+    margin: 0;
+    padding: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    list-style: none;
+}
+
+#add-friend-form input,
+#create-group-form input,
+#join-group-form input,
+#add-friend-form button,
+#create-group-form button,
+#join-group-form button {
+    width: 100%;
+    min-height: 42px;
+    border-radius: 10px;
+    font: inherit;
+}
+
+#add-friend-form input,
+#create-group-form input,
+#join-group-form input {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    outline: none;
+    color: var(--color-text);
+    background: rgba(9, 17, 12, 0.48);
+}
+
+#add-friend-form input:focus,
+#create-group-form input:focus,
+#join-group-form input:focus {
+    border-color: var(--color-accent);
+}
+
+#add-friend-form input::placeholder,
+#create-group-form input::placeholder,
+#join-group-form input::placeholder {
+    color: var(--color-muted);
+}
+
+#add-friend-form button,
+#create-group-form button,
+#join-group-form button {
+    padding: 8px 12px;
+    border: 0;
+    color: #142211;
+    background: linear-gradient(135deg, #b1f192, var(--color-accent-strong));
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.right-panel {
+    display: flex;
+    flex: 0 0 240px;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.panel-section {
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface);
+}
+
+.panel-section-title {
+    margin: 0 0 12px;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 
 .homepage-header {
@@ -200,6 +291,20 @@ h1::before {
 @media (max-width: 680px) {
     body {
         padding: 48px 20px;
+    }
+
+    .page-layout {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex: 1 1 auto;
+    }
+
+    .right-panel {
+        flex: 1 1 auto;
+        width: 100%;
     }
 
     .homepage-header {

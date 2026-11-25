@@ -20,3 +20,18 @@ class WhitelistApply(BaseModel):
 class ChatMessageCreate(BaseModel):
     username: str
     message: str
+
+
+class FriendAdd(BaseModel):
+    username: str
+    friend_username: str
+
+
+class GroupCreate(BaseModel):
+    username: str
+    name: str
+
+
+class GroupJoin(BaseModel):
+    username: str
+    group_name: str

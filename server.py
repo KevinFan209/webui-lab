@@ -154,4 +154,172 @@ def create_chat_message(
     return {"message": "已送出"}
 
 
+@app.post("/api/friends/add")
+def add_friend(
+    friendship: schemas.FriendAdd,
+    db: Session = Depends(database.get_db),
+):
+    if friendship.username == friendship.friend_username:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "不能把自己加為好友"},
+        )
+
+    user = (
+        db.query(models.User)
+        .filter(models.User.username == friendship.username)
+        .first()
+    )
+    friend = (
+        db.query(models.User)
+        .filter(models.User.username == friendship.friend_username)
+        .first()
+    )
+    if user is None or friend is None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "找不到使用者"},
+        )
+
+    existing_friendship = (
+        db.query(models.Friendship)
+        .filter(
+            models.Friendship.user_id == user.id,
+            models.Friendship.friend_id == friend.id,
+        )
+        .first()
+    )
+    if existing_friendship is not None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "已經是好友"},
+        )
+
+    db.add_all(
+        [
+            models.Friendship(user_id=user.id, friend_id=friend.id),
+            models.Friendship(user_id=friend.id, friend_id=user.id),
+        ]
+    )
+    db.commit()
+    return {"message": "已新增好友"}
+
+
+@app.get("/api/friends")
+def get_friends(username: str, db: Session = Depends(database.get_db)):
+    user = db.query(models.User).filter(models.User.username == username).first()
+    if user is None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "找不到使用者"},
+        )
+
+    friend_ids = [
+        friendship.friend_id
+        for friendship in db.query(models.Friendship)
+        .filter(models.Friendship.user_id == user.id)
+        .all()
+    ]
+    friends = db.query(models.User).filter(models.User.id.in_(friend_ids)).all()
+    return [{"username": friend.username} for friend in friends]
+
+
+@app.get("/api/groups")
+def get_groups(username: str, db: Session = Depends(database.get_db)):
+    user = db.query(models.User).filter(models.User.username == username).first()
+    if user is None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "找不到使用者"},
+        )
+
+    group_ids = [
+        membership.group_id
+        for membership in db.query(models.GroupMember)
+        .filter(models.GroupMember.user_id == user.id)
+        .all()
+    ]
+    groups = db.query(models.Group).filter(models.Group.id.in_(group_ids)).all()
+    return [{"id": group.id, "name": group.name} for group in groups]
+
+
+@app.post("/api/groups/create")
+def create_group(
+    group: schemas.GroupCreate,
+    db: Session = Depends(database.get_db),
+):
+    user = db.query(models.User).filter(models.User.username == group.username).first()
+    if user is None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "找不到使用者"},
+        )
+
+    existing_group = (
+        db.query(models.Group)
+        .filter(models.Group.name == group.name)
+        .first()
+    )
+    if existing_group is not None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "群組名稱已被使用"},
+        )
+
+    new_group = models.Group(name=group.name, created_by=user.id)
+    db.add(new_group)
+    db.commit()
+    db.refresh(new_group)
+
+    db.add(models.GroupMember(group_id=new_group.id, user_id=user.id))
+    db.commit()
+    return {"message": "群組已建立"}
+
+
+@app.post("/api/groups/join")
+def join_group(
+    membership: schemas.GroupJoin,
+    db: Session = Depends(database.get_db),
+):
+    user = (
+        db.query(models.User)
+        .filter(models.User.username == membership.username)
+        .first()
+    )
+    if user is None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "找不到使用者"},
+        )
+
+    group = (
+        db.query(models.Group)
+        .filter(models.Group.name == membership.group_name)
+        .first()
+    )
+    if group is None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "找不到群組"},
+        )
+
+    existing_membership = (
+        db.query(models.GroupMember)
+        .filter(
+            models.GroupMember.group_id == group.id,
+            models.GroupMember.user_id == user.id,
+        )
+        .first()
+    )
+    if existing_membership is not None:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "已經加入這個群組"},
+        )
+
+    db.add(models.GroupMember(group_id=group.id, user_id=user.id))
+    db.commit()
+    return {"message": "已加入群組"}
+
+
 app.mount("/", StaticFiles(directory="sites", html=True), name="sites")
