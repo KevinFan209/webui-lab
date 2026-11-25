@@ -15,3 +15,8 @@ class UserLogin(BaseModel):
 class WhitelistApply(BaseModel):
     minecraft_id: str
     note: str = ""
+
+
+class ChatMessageCreate(BaseModel):
+    username: str
+    message: str

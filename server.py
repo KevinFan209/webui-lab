@@ -115,4 +115,43 @@ def apply_for_whitelist(application: schemas.WhitelistApply):
     return {"message": "申請已送出，等待審核"}
 
 
+@app.get("/api/chat")
+def get_chat_messages(db: Session = Depends(database.get_db)):
+    messages = (
+        db.query(models.ChatMessage)
+        .order_by(models.ChatMessage.created_at.desc(), models.ChatMessage.id.desc())
+        .limit(50)
+        .all()
+    )
+    return [
+        {
+            "username": chat_message.username,
+            "message": chat_message.message,
+            "created_at": chat_message.created_at.isoformat(),
+        }
+        for chat_message in reversed(messages)
+    ]
+
+
+@app.post("/api/chat")
+def create_chat_message(
+    chat_message: schemas.ChatMessageCreate,
+    db: Session = Depends(database.get_db),
+):
+    message = chat_message.message.strip()
+    if not message:
+        return JSONResponse(
+            status_code=400,
+            content={"error": "訊息不能是空的"},
+        )
+
+    new_message = models.ChatMessage(
+        username=chat_message.username,
+        message=message,
+    )
+    db.add(new_message)
+    db.commit()
+    return {"message": "已送出"}
+
+
 app.mount("/", StaticFiles(directory="sites", html=True), name="sites")
