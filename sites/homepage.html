@@ -5,15 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>網站首頁</title>
+    <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body>
-    <button id="logout-btn">登出</button>
-    <div id="server-status">查詢中...</div>
-    <form id="whitelist-form">
-        <input type="text" name="minecraft_id" placeholder="Minecraft ID"><br>
-        <input type="text" name="note" placeholder="備註（選填）"><br>
-        <button type="submit">送出白名單申請</button>
-    </form>
+    <main class="homepage-container">
+        <header class="homepage-header">
+            <h1>伺服器玩家首頁</h1>
+            <button id="logout-btn">登出</button>
+        </header>
+        <div id="server-status">查詢中...</div>
+        <form id="whitelist-form">
+            <p>白名單申請</p>
+            <input type="text" name="minecraft_id" placeholder="Minecraft ID"><br>
+            <input type="text" name="note" placeholder="備註（選填）"><br>
+            <button type="submit">送出白名單申請</button>
+        </form>
+    </main>
     <script src="js/homepage.js"></script>
     <script src="js/status.js"></script>
 </body>
